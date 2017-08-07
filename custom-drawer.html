@@ -26,7 +26,7 @@
       height: 100%;
       box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.14);
     }
-    :host([opened]) {
+    :host(.opened) {
       opacity: 1;
       transform: translateX(0);
     }
@@ -75,16 +75,16 @@
         },
 
         right: {
-          value: false
-        },
-
-        startOpen: {
-          value: false
+          observer: '__rightChanged'
         }
       }
     }
 
-    set right(value) {
+    ready() {
+      this.right = this.hasAttribute('right') || this.right || false;
+    }
+
+    __rightChanged({value}) {
       if (value) {
         this.classList.remove('left');
         this.classList.add('right');
@@ -96,15 +96,15 @@
 
     attributeChangedCallback(name, oldValue, newValue) {
       if (name === 'start-open') {
-        this.opened = this.hasAttribute('start-open') || this.startOpen;
+        this.opened = true;
       } else {
-        this.right = this.hasAttribute('right') || newValue;
+        this.right = this.hasAttribute('right');
       }
     }
 
     __openedChanged({value}) {
-      if (value) this.setAttribute('opened', '');
-      else this.removeAttribute('opened');
+      if (value) this.classList.add('opened');
+      else this.classList.remove('opened');
     }
   });
 </script>
