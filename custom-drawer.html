@@ -3,7 +3,8 @@
 <template id="custom-drawer">
   <style>
     :host {
-      display: block;
+      display: flex;
+      flex-direction: column;
       width: var(--custom-drawer-width, 256px);
       height: 100%;
       background: var(--custom-drawer-background, #FFF);
@@ -11,11 +12,6 @@
       color: var(--custom-drawer-color, #333);
       opacity: 0;
       box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.14);
-    }
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
     }
     ::slotted([slot="header"]) {
       display: block;
@@ -42,10 +38,8 @@
     }
   </style>
   <slot name="header"></slot>
-  <span class="wrapper">
-    <slot name="content"></slot>
-    <slot name="footer"></slot>
-  </span>
+  <slot name="content"></slot>
+  <slot name="footer"></slot>
 </template>
 
 <script>
