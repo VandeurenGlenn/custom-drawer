@@ -4,21 +4,12 @@
   <style>
     :host {
       display: block;
-      position: absolute;
-      top: 0;
       width: var(--custom-drawer-width, 256px);
       height: 100%;
       background: var(--custom-drawer-background, #FFF);
       background-blend-mode: hue;
       color: var(--custom-drawer-color, #333);
-    }
-    :host(.left) {
-      left: 0;
-      transform: translateX(-110%);
-    }
-    :host(.right) {
-      right: 0;
-      transform: translateX(110%);
+      opacity: 0;
     }
     .wrapper {
       display: flex;
@@ -26,17 +17,13 @@
       height: 100%;
       box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.14);
     }
-    :host(.opened) {
-      opacity: 1;
-      transform: translateX(0);
-    }
     ::slotted([slot="header"]) {
       display: block;
       box-sizing: border-box;
       min-height: 48px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.14);
-      color: var(--custom-drawer-header-color, #FFF);
-      background: var(--custom-drawer-header-background, #EEE);
+      color: var(--custom-header-color, #FFF);
+      background: var(--custom-header-background, #EEE);
     }
     ::slotted([slot="footer"]) {
       display: block;
@@ -50,8 +37,8 @@
       height: 100%;
       width: 100%;
     }
-    :host:not([animating]) {
-      box-shadow: 0 5px 5px 3px rgba(0, 0, 0, 0.14);
+    :host(.opened) {
+      opacity: 1;
     }
   </style>
   <slot name="header"></slot>
@@ -64,7 +51,7 @@
 <script>
   Backed(class CustomDrawer extends HTMLElement {
     static get observedAttributes() {
-      return ['start-open', 'right']
+      return ['start-open']
     }
 
     static get properties() {
@@ -72,33 +59,13 @@
         opened: {
           value: false,
           observer: '__openedChanged'
-        },
-
-        right: {
-          observer: '__rightChanged'
         }
-      }
-    }
-
-    ready() {
-      this.right = this.hasAttribute('right') || this.right || false;
-    }
-
-    __rightChanged({value}) {
-      if (value) {
-        this.classList.remove('left');
-        this.classList.add('right');
-      } else {
-        this.classList.remove('right');
-        this.classList.add('left');
       }
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
       if (name === 'start-open') {
         this.opened = true;
-      } else {
-        this.right = this.hasAttribute('right');
       }
     }
 
