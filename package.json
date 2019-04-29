@@ -1,0 +1,24 @@
+{
+  "name": "custom-drawer",
+  "version": "1.0.0",
+  "description": "Custom drawer element",
+  "main": "custom-drawer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VandeurenGlenn/custom-drawer.git"
+  },
+  "keywords": [
+    "custom",
+    "element",
+    "drawer"
+  ],
+  "author": "Glenn Vandeuren <vandeurenglenn@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VandeurenGlenn/custom-drawer/issues"
+  },
+  "homepage": "https://github.com/VandeurenGlenn/custom-drawer#readme"
+}
